@@ -4,12 +4,15 @@ using System;
 public partial class Ball : RigidBody2D
 {
     // Called when the node enters the scene tree for the first time.
+    //variable for the speed
     [Export]
     public float ballSpeed = 1.0f;
 
+    //variable for the score label
     [Export]
     public Label scoreLabel;
 
+    // add a variable to keep score of the points the player gets
     public int score = 0;
 
     public int scoreValue = 50;
@@ -22,6 +25,7 @@ public partial class Ball : RigidBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        //Add controls to move the ball left and right
         if (Freeze)
         {
             float xMovement = Input.GetAxis("left", "right");
@@ -33,16 +37,19 @@ public partial class Ball : RigidBody2D
             Position = newPos;
         }
 
+        //Add controls to drop the ball 
         if (Input.IsActionJustPressed("drop_ball"))
         {
             Freeze = false;
         }
-
+        
+        //Displays the amount of points the player has on screen
         scoreLabel.Text = $"Score: {score}";
     }
-    public void _on_area_2d_area_entered(Node RigidBody2D, int scoreValue)
+
+    //Removes the balls from the screen once they touch eachother
+    public void _on_area_2d_area_entered(Node RigidBody2D)
     {        
-        score += scoreValue;
         QueueFree();
     }
 }

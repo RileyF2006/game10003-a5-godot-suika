@@ -28,10 +28,6 @@ project/assembly_name="game10003-a5-suika-game"
 
 enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg")
 
-[global_group]
-
-ball=""
-
 [input]
 
 left={

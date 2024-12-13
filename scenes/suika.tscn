@@ -26,11 +26,9 @@ position = Vector2(561, 523)
 scale = Vector2(0.240002, 8.44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Wall"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d8n86")
 
 [node name="Wall" type="Node2D" parent="Level/Wall"]
-scale = Vector2(1, 1)
 script = ExtResource("1_ov7gp")
 corner_radius = 0.0
 
@@ -82,6 +80,6 @@ position = Vector2(935, 85)
 scoreLabel = NodePath("../../Level/Score")
 
 [node name="ballTimer" type="Timer" parent="Balls"]
-wait_time = 5.0
+wait_time = 1.5
 
 [connection signal="timeout" from="Balls/ballTimer" to="Balls" method="_on_timer_timeout"]
