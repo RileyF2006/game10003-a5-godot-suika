@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://gl4n6wv1ooxi"]
+
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="1_ov7gp"]
+[ext_resource type="Script" path="res://scenes/Balls.cs" id="2_ml5u4"]
+[ext_resource type="PackedScene" uid="uid://64b6f8vob45m" path="res://scenes/ball.tscn" id="3_sxeyc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8n86"]
+size = Vector2(100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6oq25"]
+font_size = 65
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Suika" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Level"]
+offset_right = 1919.0
+offset_bottom = 1084.0
+color = Color(1, 0.627451, 0.117647, 1)
+
+[node name="Wall" type="StaticBody2D" parent="Level"]
+position = Vector2(561, 523)
+scale = Vector2(0.240002, 8.44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Wall"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_d8n86")
+
+[node name="Wall" type="Node2D" parent="Level/Wall"]
+scale = Vector2(1, 1)
+script = ExtResource("1_ov7gp")
+corner_radius = 0.0
+
+[node name="Wall2" type="StaticBody2D" parent="Level"]
+position = Vector2(561, 523)
+scale = Vector2(0.240002, 8.44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Wall2"]
+position = Vector2(3262.47, 0)
+shape = SubResource("RectangleShape2D_d8n86")
+
+[node name="Wall2" type="Node2D" parent="Level/Wall2"]
+position = Vector2(3262.47, 0)
+script = ExtResource("1_ov7gp")
+corner_radius = 0.0
+
+[node name="Floor" type="StaticBody2D" parent="Level"]
+position = Vector2(561, 523)
+scale = Vector2(0.240002, 8.44)
+skew = 4.95911e-05
+
+[node name="Floor" type="Node2D" parent="Level/Floor"]
+position = Vector2(1633.4, 48.8151)
+rotation = -1.57254
+scale = Vector2(0.0284363, 33.6664)
+skew = 0.00174534
+script = ExtResource("1_ov7gp")
+corner_radius = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Floor"]
+position = Vector2(1633.32, 48.8151)
+rotation = -1.5708
+scale = Vector2(0.0284363, 33.6664)
+shape = SubResource("RectangleShape2D_d8n86")
+
+[node name="Score" type="Label" parent="Level"]
+offset_left = 9.0
+offset_top = 102.0
+offset_right = 533.0
+offset_bottom = 192.0
+text = "Score: "
+label_settings = SubResource("LabelSettings_6oq25")
+
+[node name="Balls" type="Node2D" parent="."]
+script = ExtResource("2_ml5u4")
+
+[node name="Ball" parent="Balls" instance=ExtResource("3_sxeyc")]
+position = Vector2(935, 85)
+
+[node name="ballTimer" type="Timer" parent="Balls"]
+wait_time = 5.0
+
+[connection signal="timeout" from="Balls/ballTimer" to="Balls" method="_on_timer_timeout"]
