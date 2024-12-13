@@ -7,6 +7,13 @@ public partial class Ball : RigidBody2D
     [Export]
     public float ballSpeed = 1.0f;
 
+    [Export]
+    public Label scoreLabel;
+
+    public int score = 0;
+
+    public int scoreValue = 50;
+
     public override void _Ready()
     {
         Freeze = true;
@@ -30,9 +37,12 @@ public partial class Ball : RigidBody2D
         {
             Freeze = false;
         }
+
+        scoreLabel.Text = $"Score: {score}";
     }
-    public void _on_area_2d_area_entered(Node RigidBody2D)
-    {
+    public void _on_area_2d_area_entered(Node RigidBody2D, int scoreValue)
+    {        
+        score += scoreValue;
         QueueFree();
     }
 }

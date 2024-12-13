@@ -77,8 +77,9 @@ label_settings = SubResource("LabelSettings_6oq25")
 [node name="Balls" type="Node2D" parent="."]
 script = ExtResource("2_ml5u4")
 
-[node name="Ball" parent="Balls" instance=ExtResource("3_sxeyc")]
+[node name="Ball" parent="Balls" node_paths=PackedStringArray("scoreLabel") instance=ExtResource("3_sxeyc")]
 position = Vector2(935, 85)
+scoreLabel = NodePath("../../Level/Score")
 
 [node name="ballTimer" type="Timer" parent="Balls"]
 wait_time = 5.0
